@@ -142,7 +142,18 @@ window.addEventListener("scroll", function () {
 });
 
 // Ajusta la posición del nav para que siempre esté debajo del header
+
 function ajustarTopNav() {
+    // Actualización inmediata
+    requestAnimationFrame(() => {
+        const header = document.querySelector('.header');
+        const nav = document.querySelector('.header__nav');
+        if (header && nav) {
+            nav.style.top = `${header.getBoundingClientRect().height}px`;
+        }
+    });
+
+
     setTimeout(() => {
         requestAnimationFrame(() => {
             const header = document.querySelector('.header');
@@ -154,9 +165,11 @@ function ajustarTopNav() {
     }, 1000);
 }
 
+
 window.addEventListener('load', ajustarTopNav);
 window.addEventListener('resize', ajustarTopNav);
 window.addEventListener('scroll', ajustarTopNav);
+
 
 // Ajusta la variable CSS para la altura del header dinámicamente
 function ajustarAlturaNav() {
