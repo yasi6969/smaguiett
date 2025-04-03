@@ -84,15 +84,8 @@ function cambiarColor() {
     localStorage.setItem("colorIndex", index); 
 }
 
-//abrir menu 
 
-const menuToggle = document.querySelector('.header__menu-toggle');
-const nav = document.querySelector('.header__nav');
 
-menuToggle.addEventListener('click', function () {
-    this.classList.toggle('open');
-    nav.classList.toggle('active');
-});
 
 // Cierra el menú al hacer scroll
 window.addEventListener('scroll', function () {
@@ -144,7 +137,6 @@ window.addEventListener("scroll", function () {
 // Ajusta la posición del nav para que siempre esté debajo del header
 
 function ajustarTopNav() {
-    // Actualización inmediata
     requestAnimationFrame(() => {
         const header = document.querySelector('.header');
         const nav = document.querySelector('.header__nav');
@@ -162,7 +154,7 @@ function ajustarTopNav() {
                 nav.style.top = `${header.getBoundingClientRect().height}px`;
             }
         });
-    }, 1000);
+    }, 300);
 }
 
 
@@ -187,6 +179,23 @@ window.addEventListener('load', ajustarAlturaNav);
 window.addEventListener('resize', ajustarAlturaNav);
 window.addEventListener('scroll', ajustarAlturaNav);
 
+//abrir menu 
+
+const menuToggle = document.querySelector('.header__menu-toggle');
+const nav = document.querySelector('.header__nav');
+
+// Deshabilita el botón al inicio
+menuToggle.style.pointerEvents = 'none';
+
+setTimeout(() => {
+    // Habilita el botón después de 1 segundo
+    menuToggle.style.pointerEvents = 'auto';
+}, 1800);
+
+menuToggle.addEventListener('click', function () {
+    this.classList.toggle('open');
+    nav.classList.toggle('active');
+});
 
 
 
