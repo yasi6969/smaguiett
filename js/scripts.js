@@ -184,13 +184,13 @@ window.addEventListener('scroll', ajustarAlturaNav);
 const menuToggle = document.querySelector('.header__menu-toggle');
 const nav = document.querySelector('.header__nav');
 
-// Deshabilita el botón al inicio
+
 menuToggle.style.pointerEvents = 'none';
 
 setTimeout(() => {
-    // Habilita el botón después de 1 segundo
+
     menuToggle.style.pointerEvents = 'auto';
-}, 1800);
+}, 2500);
 
 menuToggle.addEventListener('click', function () {
     this.classList.toggle('open');

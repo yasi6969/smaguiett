@@ -32,16 +32,23 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("colorIndex", index); 
   }
   
-  //abrir menu 
-  
-  const menuToggle = document.querySelector('.header__menu-toggle');
-  const nav = document.querySelector('.header__nav');
-  
-  menuToggle.addEventListener('click', function () {
-      this.classList.toggle('open');
-      nav.classList.toggle('active');
-  });
-  
+//abrir menu 
+
+const menuToggle = document.querySelector('.header__menu-toggle');
+const nav = document.querySelector('.header__nav');
+
+
+menuToggle.style.pointerEvents = 'none';
+
+setTimeout(() => {
+
+    menuToggle.style.pointerEvents = 'auto';
+}, 2500);
+
+menuToggle.addEventListener('click', function () {
+    this.classList.toggle('open');
+    nav.classList.toggle('active');
+});
   // Cierra el menú al hacer scroll
   window.addEventListener('scroll', function () {
       if (nav.classList.contains('active')) {
