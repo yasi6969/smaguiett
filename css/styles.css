@@ -150,6 +150,7 @@ body.color3 {
   padding: 0;
   transition: border-color 0.3s ease-in-out;
   -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -340,7 +341,6 @@ h2 {
 
 }
 
-/* Animación al hacer clic */
 .header__menu-toggle.open span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
@@ -353,14 +353,18 @@ h2 {
 
 /* Menú visible */
 .header__nav.active {
-  display: flex; 
-  pointer-events: auto;
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    visibility 0s;
 }
 .header.active {
   height: 100vh;
-  border-radius: 10px;
+
   align-content: start;
 }
 
@@ -387,18 +391,24 @@ transition: padding 0.5s;
     display: block;
   }
   .header__nav {
-    display: none;
+    display: flex; 
     justify-content: center;
     align-items: center;
     position: fixed;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100vh;
     z-index: 21;
     opacity: 0;
-    transform: scale(0.6);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(-20px) scale(0.3);
+    transform-origin: top right;
+    transition:
+      opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+      transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+      visibility 0s linear 0.5s;
     pointer-events: none;
+    visibility: hidden;
   }
 
 .header__menu {
