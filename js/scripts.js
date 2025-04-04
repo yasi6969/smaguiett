@@ -1,4 +1,3 @@
-
 //letrero web app
 
 let deferredPrompt;
@@ -85,25 +84,43 @@ function cambiarColor() {
 }
 
 
+//abrir menu 
 
+const menuToggle = document.querySelector('.header__menu-toggle');
+const nav = document.querySelector('.header__nav');
+const header = document.querySelector('.header');
 
-// Cierra el menú al hacer scroll
-window.addEventListener('scroll', function () {
+menuToggle.style.pointerEvents = 'auto';
+
+menuToggle.addEventListener('click', function () {
+    menuToggle.classList.add('open');
+    nav.classList.add('active');
+    header.classList.add('active');
+});
+
+// Cierra el menú al hacer scroll o redimensionar
+function closeMenu() {
     if (nav.classList.contains('active')) {
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
+        header.classList.remove('active');
     }
-});
+}
+
+window.addEventListener('scroll', closeMenu);
+window.addEventListener('resize', closeMenu);
+
 //Cierra al dar click afuera 
 document.addEventListener('click', function (event) {
     const nav = document.querySelector('.header__nav');
     const menuToggle = document.querySelector('.header__menu-toggle');
+    const header = document.querySelector('.header');
     const isClickInsideMenu = event.target.closest('.header__menu-link') || event.target.closest('.header__menu-toggle');
-
 
     if (nav.classList.contains('active') && !isClickInsideMenu) {
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
+        header.classList.remove('active');
     }
 });
 
@@ -117,7 +134,6 @@ function ajustarMargen() {
 }
 
 document.addEventListener('DOMContentLoaded', ajustarMargen);
-window.addEventListener('resize', ajustarMargen);
 
 // Cambia el tamaño del header al hacer scroll
 window.addEventListener("scroll", function () {
@@ -134,68 +150,6 @@ window.addEventListener("scroll", function () {
     ajustarAlturaNav();
 });
 
-// Ajusta la posición del nav para que siempre esté debajo del header
-
-function ajustarTopNav() {
-    requestAnimationFrame(() => {
-        const header = document.querySelector('.header');
-        const nav = document.querySelector('.header__nav');
-        if (header && nav) {
-            nav.style.top = `${header.getBoundingClientRect().height}px`;
-        }
-    });
-
-
-    setTimeout(() => {
-        requestAnimationFrame(() => {
-            const header = document.querySelector('.header');
-            const nav = document.querySelector('.header__nav');
-            if (header && nav) {
-                nav.style.top = `${header.getBoundingClientRect().height}px`;
-            }
-        });
-    }, 300);
-}
-
-
-window.addEventListener('load', ajustarTopNav);
-window.addEventListener('resize', ajustarTopNav);
-window.addEventListener('scroll', ajustarTopNav);
-
-
-// Ajusta la variable CSS para la altura del header dinámicamente
-function ajustarAlturaNav() {
-    setTimeout(() => {
-        requestAnimationFrame(() => {
-            const header = document.querySelector('.header');
-            if (header) {
-                document.documentElement.style.setProperty('--altura-header', `${header.getBoundingClientRect().height}px`);
-            }
-        });
-    }, 1000);
-}
-
-window.addEventListener('load', ajustarAlturaNav);
-window.addEventListener('resize', ajustarAlturaNav);
-window.addEventListener('scroll', ajustarAlturaNav);
-
-//abrir menu 
-
-const menuToggle = document.querySelector('.header__menu-toggle');
-const nav = document.querySelector('.header__nav');
-
-
-menuToggle.style.pointerEvents = 'none';
-
-setTimeout(() => {
-
-    menuToggle.style.pointerEvents = 'auto';
-}, 2500);
-
-menuToggle.addEventListener('click', function () {
-    this.classList.toggle('open');
-    nav.classList.toggle('active');
-});
 
 
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = "mi-tienda-cache-v54";
+const CACHE_NAME = "mi-tienda-cache-v78";
 const URLS_A_CACHEAR = [
   "/",
   "/index.html",
