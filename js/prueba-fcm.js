@@ -18,7 +18,7 @@ const messaging = getMessaging(app);
 
 let lastNotificationId = null;
 
-// Registrar el Service Worker
+// Registra el Service Worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/js/firebase-messaging-sw.js")
@@ -78,7 +78,7 @@ window.addEventListener("DOMContentLoaded", () => {
     obtenerYGuardarToken();
     notificacion.style.display = "none"; 
   } else if (Notification.permission === "denied") {
-    console.warn("❌ El usuario ya denegó los permisos de notificación.");
+    console.warn(" El usuario ya denegó los permisos de notificación. >:(");
   }
 });
 
@@ -86,7 +86,7 @@ document.querySelector(".texto__notificacion").addEventListener("click", () => {
   Notification.requestPermission().then(permiso => {
     if (permiso === "granted") {
       new Notification("¡Gracias por suscribirte a nuestras notificaciones!");
-      document.querySelector(".notificacion").style.display = "none"; // Ocultar sin recargar
+      document.querySelector(".notificacion").style.display = "none";
     }
   });
 });

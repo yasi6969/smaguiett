@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add(colores[index]);
       localStorage.setItem("colorIndex", index); 
   }
-  
+
 //abrir menu 
 const menuToggle = document.querySelector('.header__menu-toggle');
 const nav = document.querySelector('.header__nav');
@@ -44,20 +44,20 @@ menuToggle.addEventListener('click', function (event) {
     event.stopPropagation(); 
 
     if (nav.classList.contains('active')) {
-        // Elimina las clases
+    
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
         
-        // Restablece los estilos directamente modificados por JS
-        nav.style.display = '';  // Restablece el valor original de display (vacío)
+
+        nav.style.display = ''; 
         
     } else {
         // Muestra el menú
         menuToggle.classList.add('open');
-        nav.style.display = 'flex';  // Asegúrate de que el display sea 'flex' solo cuando se abre el menú
+        nav.style.display = 'flex';  
         
-        // Añade las clases con un pequeño retraso
+
         setTimeout(() => {
             nav.classList.add('active');
             header.classList.add('active');
@@ -68,25 +68,25 @@ menuToggle.addEventListener('click', function (event) {
 // Cierra el menú al hacer scroll o redimensionar
 function closeMenu() {
     if (nav.classList.contains('active')) {
-        // Elimina las clases
+
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
         
-        // Restablece los estilos
-        nav.style.display = '';  // Restablece display al valor por defecto
+
+        nav.style.display = ''; 
     }
 }
 
 window.addEventListener('scroll', closeMenu);
 window.addEventListener('resize', closeMenu);
 
-// Cierra el menú al dar clic afuera
+
 document.addEventListener('click', function (event) {
     const isClickInsideMenu = event.target.closest('.header__menu-link') || event.target.closest('.header__menu-toggle');
 
     if (nav.classList.contains('active') && !isClickInsideMenu) {
-        // Elimina las clases
+
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
     actualizarContadorCarrito();
 });
 
-// Delegación de eventos única para toda la página
+// eventos unicos
 document.addEventListener("click", (event) => {
     if (event.target.classList.contains("toggle-descripcion")) {
         const descripcion = event.target.closest(".producto__descripcion");

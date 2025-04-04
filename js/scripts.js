@@ -96,7 +96,7 @@ menuToggle.addEventListener('click', function (event) {
     event.stopPropagation(); 
 
     if (nav.classList.contains('active')) {
-        // Elimina las clases
+
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
@@ -105,7 +105,7 @@ menuToggle.addEventListener('click', function (event) {
         nav.style.display = '';  
         
     } else {
-        // Muestra el menú
+ 
         menuToggle.classList.add('open');
         nav.style.display = 'flex';  
         
@@ -120,7 +120,7 @@ menuToggle.addEventListener('click', function (event) {
 
 function closeMenu() {
     if (nav.classList.contains('active')) {
-        // Elimina las clases
+
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
@@ -149,7 +149,7 @@ document.addEventListener('click', function (event) {
 
 
 
-// Ajusta el margen superior del body según la altura del header solo al cargar la página
+
 function ajustarMargen() {
     const header = document.querySelector('.header');
     if (!header) return;
@@ -158,11 +158,11 @@ function ajustarMargen() {
     body.style.marginTop = `${header.offsetHeight - 12}px`;
 }
 
-// Ejecuta la función solo cuando el contenido esté completamente cargado
+
 document.addEventListener('DOMContentLoaded', ajustarMargen);
 
 
-// Cambia el tamaño del header al hacer scroll
+
 window.addEventListener("scroll", function () {
     const header = document.querySelector(".header");
     if (!header) return;

@@ -44,16 +44,16 @@ menuToggle.addEventListener('click', function (event) {
     event.stopPropagation(); 
 
     if (nav.classList.contains('active')) {
-        // Elimina las clases
+
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
         
-      
+
         nav.style.display = '';  
         
     } else {
-        // Muestra el menú
+
         menuToggle.classList.add('open');
         nav.style.display = 'flex';  
         
@@ -68,12 +68,12 @@ menuToggle.addEventListener('click', function (event) {
 
 function closeMenu() {
     if (nav.classList.contains('active')) {
-        // Elimina las clases
+
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
         
-      
+    
         nav.style.display = '';  
     }
 }
@@ -119,9 +119,9 @@ window.addEventListener("scroll", function () {
     
 });
 
-  
 
-  
+
+
 document.addEventListener("DOMContentLoaded", () => {
     mostrarCarrito();
 
@@ -146,7 +146,7 @@ function mostrarCarrito() {
     const carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
     const listaCarrito = document.getElementById("lista-carrito");
     const btnPedido = document.getElementById("realizar-pedido");
-    const btnVaciar = document.getElementById("vaciar-carrito"); // Seleccionar botón de vaciar carrito
+    const btnVaciar = document.getElementById("vaciar-carrito");
 
     listaCarrito.innerHTML = carrito.length === 0 
         ? "<p>El carrito está vacío.</p>" 
