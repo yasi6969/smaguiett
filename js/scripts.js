@@ -93,9 +93,16 @@ const header = document.querySelector('.header');
 menuToggle.style.pointerEvents = 'auto';
 
 menuToggle.addEventListener('click', function () {
-    menuToggle.classList.add('open');
-    nav.classList.add('active');
-    header.classList.add('active');
+
+    if (nav.classList.contains('active')) {
+        menuToggle.classList.remove('open');
+        nav.classList.remove('active');
+        header.classList.remove('active');
+    } else {
+        menuToggle.classList.add('open');
+        nav.classList.add('active');
+        header.classList.add('active');
+    }
 });
 
 // Cierra el menú al hacer scroll o redimensionar
@@ -112,9 +119,6 @@ window.addEventListener('resize', closeMenu);
 
 //Cierra al dar click afuera 
 document.addEventListener('click', function (event) {
-    const nav = document.querySelector('.header__nav');
-    const menuToggle = document.querySelector('.header__menu-toggle');
-    const header = document.querySelector('.header');
     const isClickInsideMenu = event.target.closest('.header__menu-link') || event.target.closest('.header__menu-toggle');
 
     if (nav.classList.contains('active') && !isClickInsideMenu) {

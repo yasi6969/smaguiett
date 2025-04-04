@@ -36,98 +36,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const menuToggle = document.querySelector('.header__menu-toggle');
 const nav = document.querySelector('.header__nav');
+const header = document.querySelector('.header');
 
-
-menuToggle.style.pointerEvents = 'none';
-
-setTimeout(() => {
-
-    menuToggle.style.pointerEvents = 'auto';
-}, 2500);
+menuToggle.style.pointerEvents = 'auto';
 
 menuToggle.addEventListener('click', function () {
-    this.classList.toggle('open');
-    nav.classList.toggle('active');
+
+    if (nav.classList.contains('active')) {
+        menuToggle.classList.remove('open');
+        nav.classList.remove('active');
+        header.classList.remove('active');
+    } else {
+        menuToggle.classList.add('open');
+        nav.classList.add('active');
+        header.classList.add('active');
+    }
 });
-  // Cierra el menú al hacer scroll
-  window.addEventListener('scroll', function () {
-      if (nav.classList.contains('active')) {
-          menuToggle.classList.remove('open');
-          nav.classList.remove('active');
-      }
-  });
-  //Cierra al dar click afuera 
-  document.addEventListener('click', function (event) {
-      const nav = document.querySelector('.header__nav');
-      const menuToggle = document.querySelector('.header__menu-toggle');
-      const isClickInsideMenu = event.target.closest('.header__menu-link') || event.target.closest('.header__menu-toggle');
-  
-  
-      if (nav.classList.contains('active') && !isClickInsideMenu) {
-          menuToggle.classList.remove('open');
-          nav.classList.remove('active');
-      }
-  });
-  
-  // Ajusta el margen superior del body según la altura del header
-  function ajustarMargen() {
-      const header = document.querySelector('.header');
-      if (!header) return;
-      
-      const body = document.body;
-      body.style.marginTop = `${header.offsetHeight - 12}px`;
-  }
-  
-  document.addEventListener('DOMContentLoaded', ajustarMargen);
-  window.addEventListener('resize', ajustarMargen);
-  
-  // Cambia el tamaño del header al hacer scroll
-  window.addEventListener("scroll", function () {
-      const header = document.querySelector(".header");
-      if (!header) return;
-      
-      if (window.scrollY > 50) {
-          header.classList.add("header-small");
-      } else {
-          header.classList.remove("header-small");
-      }
-      
-      ajustarTopNav();
-      ajustarAlturaNav();
-  });
-  
-  // Ajusta la posición del nav para que siempre esté debajo del header
-  function ajustarTopNav() {
-      setTimeout(() => {
-          requestAnimationFrame(() => {
-              const header = document.querySelector('.header');
-              const nav = document.querySelector('.header__nav');
-              if (header && nav) {
-                  nav.style.top = `${header.getBoundingClientRect().height}px`;
-              }
-          });
-      }, 1000);
-  }
-  
-  window.addEventListener('load', ajustarTopNav);
-  window.addEventListener('resize', ajustarTopNav);
-  window.addEventListener('scroll', ajustarTopNav);
-  
-  // Ajusta la variable CSS para la altura del header dinámicamente
-  function ajustarAlturaNav() {
-      setTimeout(() => {
-          requestAnimationFrame(() => {
-              const header = document.querySelector('.header');
-              if (header) {
-                  document.documentElement.style.setProperty('--altura-header', `${header.getBoundingClientRect().height}px`);
-              }
-          });
-      }, 1000);
-  }
-  
-  window.addEventListener('load', ajustarAlturaNav);
-  window.addEventListener('resize', ajustarAlturaNav);
-  window.addEventListener('scroll', ajustarAlturaNav);
+
+// Cierra el menú al hacer scroll o redimensionar
+function closeMenu() {
+    if (nav.classList.contains('active')) {
+        menuToggle.classList.remove('open');
+        nav.classList.remove('active');
+        header.classList.remove('active');
+    }
+}
+
+window.addEventListener('scroll', closeMenu);
+window.addEventListener('resize', closeMenu);
+
+//Cierra al dar click afuera 
+document.addEventListener('click', function (event) {
+    const isClickInsideMenu = event.target.closest('.header__menu-link') || event.target.closest('.header__menu-toggle');
+
+    if (nav.classList.contains('active') && !isClickInsideMenu) {
+        menuToggle.classList.remove('open');
+        nav.classList.remove('active');
+        header.classList.remove('active');
+    }
+});
+
+// Ajusta el margen superior del body según la altura del header
+function ajustarMargen() {
+    const header = document.querySelector('.header');
+    if (!header) return;
+    
+    const body = document.body;
+    body.style.marginTop = `${header.offsetHeight - 12}px`;
+}
+
+document.addEventListener('DOMContentLoaded', ajustarMargen);
+
+// Cambia el tamaño del header al hacer scroll
+window.addEventListener("scroll", function () {
+    const header = document.querySelector(".header");
+    if (!header) return;
+    
+    if (window.scrollY > 50) {
+        header.classList.add("header-small");
+    } else {
+        header.classList.remove("header-small");
+    }
+    
+    ajustarTopNav();
+    ajustarAlturaNav();
+});
 
   
 
