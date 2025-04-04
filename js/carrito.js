@@ -37,63 +37,97 @@ const menuToggle = document.querySelector('.header__menu-toggle');
 const nav = document.querySelector('.header__nav');
 const header = document.querySelector('.header');
 
-menuToggle.style.pointerEvents = 'auto';
+// Abrir/Cerrar con toggle
+menuToggle.addEventListener('click', () => {
+  const isOpen = header.classList.contains('active');
 
-menuToggle.addEventListener('click', function (event) {
-    console.log('Menu toggle clicked'); 
-    event.stopPropagation(); 
+  if (isOpen) {
+    closeMenu();
+  } else {
+    // Abrir animado
+    header.style.height = '80px';
+    header.classList.add('active');
+    nav.classList.add('active');
+    menuToggle.classList.add('open');
 
-    if (nav.classList.contains('active')) {
+    requestAnimationFrame(() => {
+      header.style.transition = 'height 0.5s ease';
+      header.style.height = '100vh';
+    });
+  }
+});
 
-        menuToggle.classList.remove('open');
-        nav.classList.remove('active');
-        header.classList.remove('active');
-        
+//guarda alura del header 
 
-        nav.style.display = '';  
-        
-    } else {
+let headerClosedHeight;
 
-        menuToggle.classList.add('open');
-        nav.style.display = 'flex';  
-        
-        
-        setTimeout(() => {
-            nav.classList.add('active');
-            header.classList.add('active');
-        }, 10); 
-    }
+function updateHeaderClosedHeight() {
+
+  if (!nav.classList.contains('active')) {
+    headerClosedHeight = header.offsetHeight + 'px';
+  }
+}
+
+window.addEventListener('DOMContentLoaded', updateHeaderClosedHeight);
+
+
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+  clearTimeout(scrollTimeout);
+
+  scrollTimeout = setTimeout(() => {
+    updateHeaderClosedHeight();
+  }, 500); 
 });
 
 
+window.addEventListener('resize', () => {
+  setTimeout(updateHeaderClosedHeight, 300);
+});
+
+// Cerrar animado
 function closeMenu() {
     if (nav.classList.contains('active')) {
-
-        menuToggle.classList.remove('open');
-        nav.classList.remove('active');
+      const currentHeight = header.scrollHeight + 'px';
+      header.style.height = currentHeight;
+  
+      requestAnimationFrame(() => {
+        header.style.transition = 'height 0.5s ease';
+        header.style.height = headerClosedHeight;
+      });
+  
+      menuToggle.classList.remove('open');
+      nav.classList.remove('active');
+  
+      setTimeout(() => {
         header.classList.remove('active');
-        
-    
-        nav.style.display = '';  
+        header.style.height = '';
+        header.style.transition = '';
+        nav.style.display = '';
+      }, 500);
     }
-}
+  }
+  
+  
+  
+  
+  
+
 
 window.addEventListener('scroll', closeMenu);
 window.addEventListener('resize', closeMenu);
 
 
 document.addEventListener('click', function (event) {
-    const isClickInsideMenu = event.target.closest('.header__menu-link') || event.target.closest('.header__menu-toggle');
+  const isClickInsideMenu =
+    event.target.closest('.header__menu-link') ||
+    event.target.closest('.header__menu-toggle');
 
-    if (nav.classList.contains('active') && !isClickInsideMenu) {
-
-        menuToggle.classList.remove('open');
-        nav.classList.remove('active');
-        header.classList.remove('active');
-        
-        nav.style.display = '';  
-    }
+  if (nav.classList.contains('active') && !isClickInsideMenu) {
+    closeMenu();
+  }
 });
+
 
 // Ajusta el margen superior del body según la altura del header
 function ajustarMargen() {

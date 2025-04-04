@@ -401,7 +401,7 @@ transition: padding 0.5s;
     height: 100vh;
     z-index: 21;
     opacity: 0;
-    transform: translateY(-20px) scale(0.3);
+    transform: translateY(-20px) scale(0.2);
     transform-origin: top right;
     transition:
       opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1),
