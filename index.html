@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6SH430B0TE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,6 +8,12 @@
         gtag('js', new Date());
         gtag('config', 'G-6SH430B0TE');
     </script>
+    
+    <meta name="twitter:card" content="/imagenes/banner.jpg">
+    <meta name="twitter:site" content="@smaguiett">
+    <meta name="twitter:title" content="Studio MaguieTT - Insumos para tatuadores">
+    <meta name="twitter:description" content="Los mejores productos para tatuadores, piercings y smoke shop en un solo lugar.">
+    <meta name="twitter:image" content="/imagenes/banner.jpg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +23,7 @@
 
     <meta property="og:title" content="Studio Maguie Tattoo - Insumos para tatuadores">
     <meta property="og:description" content="Los mejores productos para tatuadores, piercings y smoke shop en un solo lugar.">
-    <meta property="og:image" content="/imagenes/logocirculo.png">
+    <meta property="og:image" content="/imagenes/banner.jpg">
     <meta property="og:type" content="website">
 
     <title>SmaguieTT - Insumos para tatuadores, piercing y smoke shop</title>
@@ -33,13 +38,11 @@
                 .then((registration) => {
 
                 })
-                .catch(error => console.log("❌ Error registrando el Service Worker:", error));
+                .catch(error => console.log(" Error registrando el Service Worker:", error));
         }
     </script>
 </head>
 <body>
-
-    <!-- Banner de instalación PWA -->
     <div id="install-banner" class="install-banner" role="alert">
         <p class="install-banner__text">¿Quieres instalar nuestra Web App?</p>
         <button class="install-banner__btn install-banner__btn--install" 
