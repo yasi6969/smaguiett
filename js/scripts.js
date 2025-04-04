@@ -117,7 +117,7 @@ menuToggle.addEventListener('click', function (event) {
     }
 });
 
-
+//cerar menu
 function closeMenu() {
     if (nav.classList.contains('active')) {
 
