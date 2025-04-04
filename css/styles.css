@@ -195,8 +195,6 @@ h2 {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    transition: height 0.3s ease-in-out;
-    overflow: hidden; 
 }
 
 

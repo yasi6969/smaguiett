@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/yasi6969/smaguiett#readme",
   "dependencies": {
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "firebase": "^11.6.0"
   }
 }

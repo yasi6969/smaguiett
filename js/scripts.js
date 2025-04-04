@@ -85,28 +85,31 @@ function cambiarColor() {
 
 
 //abrir menu 
-
 const menuToggle = document.querySelector('.header__menu-toggle');
 const nav = document.querySelector('.header__nav');
 const header = document.querySelector('.header');
 
 menuToggle.style.pointerEvents = 'auto';
 
-menuToggle.addEventListener('click', function () {
+menuToggle.addEventListener('click', function (event) {
+    console.log('Menu toggle clicked'); 
+    event.stopPropagation(); 
+
     if (nav.classList.contains('active')) {
+        // Elimina las clases
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
-
-
-        setTimeout(() => {
-            nav.style.display = 'none';
-        }, 300); 
+        
+      
+        nav.style.display = '';  
+        
     } else {
+        // Muestra el menú
         menuToggle.classList.add('open');
-        nav.style.display = 'flex'; 
-
-
+        nav.style.display = 'flex';  
+        
+        
         setTimeout(() => {
             nav.classList.add('active');
             header.classList.add('active');
@@ -114,30 +117,39 @@ menuToggle.addEventListener('click', function () {
     }
 });
 
-// Cierra el menú al hacer scroll o redimensionar
+
 function closeMenu() {
     if (nav.classList.contains('active')) {
+        // Elimina las clases
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
+        
+      
+        nav.style.display = '';  
     }
 }
 
 window.addEventListener('scroll', closeMenu);
 window.addEventListener('resize', closeMenu);
 
-//Cierra al dar click afuera 
+
 document.addEventListener('click', function (event) {
     const isClickInsideMenu = event.target.closest('.header__menu-link') || event.target.closest('.header__menu-toggle');
 
     if (nav.classList.contains('active') && !isClickInsideMenu) {
+
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
+        
+        nav.style.display = '';  
     }
 });
 
-// Ajusta el margen superior del body según la altura del header
+
+
+// Ajusta el margen superior del body según la altura del header solo al cargar la página
 function ajustarMargen() {
     const header = document.querySelector('.header');
     if (!header) return;
@@ -146,7 +158,9 @@ function ajustarMargen() {
     body.style.marginTop = `${header.offsetHeight - 12}px`;
 }
 
+// Ejecuta la función solo cuando el contenido esté completamente cargado
 document.addEventListener('DOMContentLoaded', ajustarMargen);
+
 
 // Cambia el tamaño del header al hacer scroll
 window.addEventListener("scroll", function () {
@@ -159,8 +173,6 @@ window.addEventListener("scroll", function () {
         header.classList.remove("header-small");
     }
     
-    ajustarTopNav();
-    ajustarAlturaNav();
 });
 
 
