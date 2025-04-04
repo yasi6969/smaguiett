@@ -337,11 +337,11 @@ h2 {
 
 /* Menú visible */
 .header__nav.active {
-  transform: scale(1);
-  display: flex;
+  display: flex; /* Asegúrate de controlar display con JS */
   pointer-events: auto;
+  opacity: 1;
+  transform: scale(1);
 }
-
 .header.active {
   height: 100%;
 }
@@ -373,12 +373,14 @@ transition: padding 0.5s;
     pointer-events: none;
     width: 100vw;
     height: 100vh;
-    padding-bottom: 30%;
+    padding-bottom: 35%;
     align-items: center;
     justify-content: center;
     z-index: 30;
-}
-
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
 
 .header__menu {
     flex-direction: column;

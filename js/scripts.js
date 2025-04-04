@@ -93,15 +93,24 @@ const header = document.querySelector('.header');
 menuToggle.style.pointerEvents = 'auto';
 
 menuToggle.addEventListener('click', function () {
-
     if (nav.classList.contains('active')) {
         menuToggle.classList.remove('open');
         nav.classList.remove('active');
         header.classList.remove('active');
+
+
+        setTimeout(() => {
+            nav.style.display = 'none';
+        }, 300); 
     } else {
         menuToggle.classList.add('open');
-        nav.classList.add('active');
-        header.classList.add('active');
+        nav.style.display = 'flex'; 
+
+
+        setTimeout(() => {
+            nav.classList.add('active');
+            header.classList.add('active');
+        }, 10); 
     }
 });
 
