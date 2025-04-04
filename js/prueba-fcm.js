@@ -3,13 +3,13 @@ import { getFirestore, collection, query, where, getDocs, addDoc } from "https:/
 import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-messaging.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCfc0_ZmMa1mQv6TRC88qVQ6xRXrvhjvAM",
-  authDomain: "base-de-datos-smaguiett.firebaseapp.com",
-  projectId: "base-de-datos-smaguiett",
-  storageBucket: "base-de-datos-smaguiett.firebasestorage.app",
-  messagingSenderId: "288404901483",
-  appId: "1:288404901483:web:c777b85fb6f10718552b2e",
-  measurementId: "G-TYFEQ310GC"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
@@ -54,7 +54,7 @@ async function obtenerYGuardarToken() {
   try {
     const registration = await navigator.serviceWorker.ready;
     const token = await getToken(messaging, {
-      vapidKey: "BBfRb36Ccyp9QD4XIyid0Rv77nb298xQFCaPC3z_dlVsalOHm-xX6PKx0bge2zauZLOz87E6srBEA_Fr1BCm7Uc",
+      vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
       serviceWorkerRegistration: registration, 
     });
 
