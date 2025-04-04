@@ -64,7 +64,7 @@ Abrir index.html en el navegador.
 
 ## 📩 Contacto y Desarrollo  
 
-Este proyecto está en constante evolución, con mejoras en funcionalidad y rendimiento. Para más información o contribuciones:  
+Este proyecto está en constante evolución, con mejoras en funcionalidad y rendimiento. Para más información:  
 
 📧 **Correo:** santiagocn08@gmail.com  
 📱 **WhatsApp:** +57 323 6869 420  
