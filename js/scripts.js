@@ -1,55 +1,4 @@
-//letrero web app
-
-let deferredPrompt;
-
-const BANNER_ID = 'install-banner';
-const DESKTOP_BREAKPOINT = 768;
-
-window.addEventListener("beforeinstallprompt", (event) => {
-    event.preventDefault();
-    deferredPrompt = event;
-
-    const isDesktop = window.innerWidth > DESKTOP_BREAKPOINT;
-    const isPWA = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
-
-    if (!isPWA && !isDesktop) {
-        mostrarBanner();
-    }
-});
-
-function mostrarBanner() {
-    const banner = document.getElementById(BANNER_ID);
-    if (banner) {
-        banner.style.display = "grid";
-    }
-}
-
-function instalarApp() {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === "accepted") {
-                console.log("✅ Usuario aceptó la instalación");
-            } else {
-                console.log("❌ Usuario rechazó la instalación");
-            }
-            deferredPrompt = null;
-            cerrarBanner();
-        });
-    }
-}
-
-function cerrarBanner() {
-    const banner = document.getElementById(BANNER_ID);
-    if (banner) {
-        banner.style.display = "none";
-    }
-}
-
-
-
-//aniamciond e carga
+//animacion de carga
 
 document.addEventListener("DOMContentLoaded", () => {
   const elementos = document.querySelectorAll(".animado");
@@ -67,10 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
-
-//logo modo clro 
+//logo cambiar tema
 let colores = ["color1", "color2", "color3"];
 let index = localStorage.getItem("colorIndex") ? parseInt(localStorage.getItem("colorIndex")) : 0;
 
@@ -84,32 +30,31 @@ function cambiarColor() {
 }
 
 
-//abrir menu 
+//HEADER - abrir menu 
 const menuToggle = document.querySelector('.header__menu-toggle');
 const nav = document.querySelector('.header__nav');
 const header = document.querySelector('.header');
 
-// Abrir/Cerrar con toggle
 menuToggle.addEventListener('click', () => {
   const isOpen = header.classList.contains('active');
 
   if (isOpen) {
     closeMenu();
   } else {
-    // Abrir animado
+
     header.style.height = '80px';
     header.classList.add('active');
     nav.classList.add('active');
     menuToggle.classList.add('open');
 
     requestAnimationFrame(() => {
-      header.style.transition = 'height 0.5s ease';
+      header.style.transition = 'height 0.3s ease';
       header.style.height = '100vh';
     });
   }
 });
 
-//guarda alura del header 
+//HEADER - Guardar altura
 
 let headerClosedHeight;
 
@@ -121,7 +66,6 @@ function updateHeaderClosedHeight() {
 }
 
 window.addEventListener('DOMContentLoaded', updateHeaderClosedHeight);
-
 
 let scrollTimeout;
 window.addEventListener('scroll', () => {
@@ -137,7 +81,7 @@ window.addEventListener('resize', () => {
   setTimeout(updateHeaderClosedHeight, 300);
 });
 
-// Cerrar animado
+//HEADER - Cerrar menu
 function closeMenu() {
     if (nav.classList.contains('active')) {
       const currentHeight = header.scrollHeight + 'px';
@@ -159,11 +103,6 @@ function closeMenu() {
       }, 500);
     }
   }
-  
-  
-  
-  
-  
 
 
 window.addEventListener('scroll', closeMenu);
@@ -182,8 +121,7 @@ document.addEventListener('click', function (event) {
 
 
 
-
-
+//HEADER - Ajustar margen
 function ajustarMargen() {
     const header = document.querySelector('.header');
     if (!header) return;
@@ -195,7 +133,7 @@ function ajustarMargen() {
 
 document.addEventListener('DOMContentLoaded', ajustarMargen);
 
-//volver peuqeño el header
+//HEADER - Small
 
 window.addEventListener("scroll", function () {
     const header = document.querySelector(".header");
@@ -210,106 +148,44 @@ window.addEventListener("scroll", function () {
 });
 
 
+// FOOTER - Animación de iconos y texto en el footer
+const footerItems = document.querySelectorAll(".footer__item");
+const footerText = document.querySelector(".footer__text");
 
-
-//  Swiper 1
-var swiper1 = new Swiper(".swiper1", {
-  loop:true,
-  effect: 'fade',
-  navigation: {
-      nextEl: ".next1",
-      prevEl: ".prev1"
-  },
- 
-});
-
-
-  
-
-//  Swiper 2
-let swiper2 = new Swiper(".productos__content", {
-  loop: true,
-  autoplay: true,
-  spaceBetween: 15,
-  grabCursor: true,
-
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-    dynamicBullets: true,
-  },
-  
-  navigation: {
-    nextEl: ".next2",
-    prevEl: ".prev2",
-  },
-
-  breakpoints: {
-    600: {
-      slidesPerView: 2,
-    },
-    968: {
-      slidesPerView: 3,
-    },
-    1180: {
-      slidesPerView: 4,
-    }
-  },
-
-
-});
-
-
-
-
-
-// vermas enlos prodctos
-document.addEventListener("DOMContentLoaded", function() {
-  const botonesVerMas = document.querySelectorAll(".ver-mas");
-  const contenedorProductos = document.querySelector(".productos__container"); 
-  botonesVerMas.forEach(boton => {
-      boton.addEventListener("click", function(event) {
-          let descripcion = this.previousElementSibling;
-          let abierto = descripcion.style.display === "inline";
-          descripcion.style.display = abierto ? "none" : "inline";
-          this.textContent = abierto ? "Ver más" : "Ver menos";
-
-          event.stopPropagation(); 
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      footerItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("footer__item--visible");
+        }, index * 100);
       });
-  });
-  document.addEventListener("click", function(event) {
-      if (!contenedorProductos.contains(event.target)) {
-          botonesVerMas.forEach(boton => {
-              let descripcion = boton.previousElementSibling;
-              descripcion.style.display = "none";
-              boton.textContent = "Ver más";
-          });
+
+      if (footerText) {
+        footerText.classList.add("footer__text--visible");
       }
-  });
-});
+    } else {
+      footerItems.forEach((item) => {
+        item.classList.remove("footer__item--visible");
+      });
 
-
-
-
-// Animación de iconos en el footer
-document.addEventListener("DOMContentLoaded", function () {
-    const icons = document.querySelectorAll("#contacto ul li a img");
-    const contacto = document.querySelector("#contacto");
-
-    function mostrarIconos() {
-        if (contacto.getBoundingClientRect().top < window.innerHeight) {
-            icons.forEach((icono, index) => {
-                setTimeout(() => {
-                    icono.classList.add("revelar");
-                }, index * 150); // Retraso en la animación de cada ícono
-            });
-        }
+      if (footerText) {
+        footerText.classList.remove("footer__text--visible");
+      }
     }
-
-    window.addEventListener("scroll", mostrarIconos);
+  });
+}, {
+  threshold: 0.2
 });
 
-// Paignas randoms onclick
+const footer = document.querySelector(".footer");
+if (footer) observer.observe(footer);
+
+
+
+
+
+// FOOTER - Paginas randoms onclick
 
 function redireccionar() {
   const sitios = [
@@ -414,7 +290,13 @@ function redireccionar() {
 
 
   ];
-  
   const randomIndex = Math.floor(Math.random() * sitios.length);
   window.open(sitios[randomIndex], "_blank");
 }
+
+//cacheee
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js")
+      .then(() => console.log("Service Worker registrado"))
+      .catch((err) => console.log("Error al registrar el Service Worker:", err));
+  }

@@ -1,185 +1,5 @@
-//aniamciond e carga
 
-document.addEventListener("DOMContentLoaded", () => {
-    const elementos = document.querySelectorAll(".animado");
-  
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("mostrar");
-                observer.unobserve(entry.target); 
-            }
-        });
-    }, { threshold: 0.2 });
-  
-    elementos.forEach(el => observer.observe(el));
-  });
-  
-  
-  
-  
-  
-  //logo modo clro 
-  let colores = ["color1", "color2", "color3"];
-  let index = localStorage.getItem("colorIndex") ? parseInt(localStorage.getItem("colorIndex")) : 0;
-  
-  document.body.classList.add(colores[index]);
-  
-  function cambiarColor() {
-      document.body.classList.remove(...colores);
-      index = (index + 1) % colores.length; 
-      document.body.classList.add(colores[index]);
-      localStorage.setItem("colorIndex", index); 
-  }
-
-//abrir menu 
-const menuToggle = document.querySelector('.header__menu-toggle');
-const nav = document.querySelector('.header__nav');
-const header = document.querySelector('.header');
-
-// Abrir/Cerrar con toggle
-menuToggle.addEventListener('click', () => {
-  const isOpen = header.classList.contains('active');
-
-  if (isOpen) {
-    closeMenu();
-  } else {
-    // Abrir animado
-    header.style.height = '80px';
-    header.classList.add('active');
-    nav.classList.add('active');
-    menuToggle.classList.add('open');
-
-    requestAnimationFrame(() => {
-      header.style.transition = 'height 0.5s ease';
-      header.style.height = '100vh';
-    });
-  }
-});
-
-//guarda alura del header 
-
-let headerClosedHeight;
-
-function updateHeaderClosedHeight() {
-
-  if (!nav.classList.contains('active')) {
-    headerClosedHeight = header.offsetHeight + 'px';
-  }
-}
-
-window.addEventListener('DOMContentLoaded', updateHeaderClosedHeight);
-
-
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-  clearTimeout(scrollTimeout);
-
-  scrollTimeout = setTimeout(() => {
-    updateHeaderClosedHeight();
-  }, 500); 
-});
-
-
-window.addEventListener('resize', () => {
-  setTimeout(updateHeaderClosedHeight, 300);
-});
-
-// Cerrar animado
-function closeMenu() {
-    if (nav.classList.contains('active')) {
-      const currentHeight = header.scrollHeight + 'px';
-      header.style.height = currentHeight;
-  
-      requestAnimationFrame(() => {
-        header.style.transition = 'height 0.5s ease';
-        header.style.height = headerClosedHeight;
-      });
-  
-      menuToggle.classList.remove('open');
-      nav.classList.remove('active');
-  
-      setTimeout(() => {
-        header.classList.remove('active');
-        header.style.height = '';
-        header.style.transition = '';
-        nav.style.display = '';
-      }, 500);
-    }
-  }
-  
-  
-  
-  
-  
-
-
-window.addEventListener('scroll', closeMenu);
-window.addEventListener('resize', closeMenu);
-
-
-document.addEventListener('click', function (event) {
-  const isClickInsideMenu =
-    event.target.closest('.header__menu-link') ||
-    event.target.closest('.header__menu-toggle');
-
-  if (nav.classList.contains('active') && !isClickInsideMenu) {
-    closeMenu();
-  }
-});
-
-
-
-// Ajusta el margen superior del body según la altura del header solo al cargar la página
-function ajustarMargen() {
-    const header = document.querySelector('.header');
-    if (!header) return;
-    
-    const body = document.body;
-    body.style.marginTop = `${header.offsetHeight - 12}px`;
-}
-
-
-document.addEventListener('DOMContentLoaded', ajustarMargen);
-
-// Cambia el tamaño del header al hacer scroll
-window.addEventListener("scroll", function () {
-    const header = document.querySelector(".header");
-    if (!header) return;
-    
-    if (window.scrollY > 50) {
-        header.classList.add("header-small");
-    } else {
-        header.classList.remove("header-small");
-    }
-    
-    });
-
-
-//cacheee
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/sw.js")
-        .then(() => console.log("Service Worker registrado"))
-        .catch((err) => console.log("Error al registrar el Service Worker:", err));
-    }
-
-
-
-//HEADER SMALL
-
-
-
-window.addEventListener("scroll", function () {
-    var header = document.querySelector(".header");
-    if (window.scrollY > 50) {
-        header.classList.add("header-small");
-    } else {
-        header.classList.remove("header-small");
-    }
-});
-
-
-//filtro, scrol, mover, carirto, bla blabla
+//CATALOGO, CARGA RPORUDCOTS Y FILTROS
 
 function moverScroll(id, direccion) {
     const categoriaProductos = document.getElementById(id);
@@ -204,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     actualizarContadorCarrito();
 });
 
-// eventos unicos
+
 document.addEventListener("click", (event) => {
     if (event.target.classList.contains("toggle-descripcion")) {
         const descripcion = event.target.closest(".producto__descripcion");
@@ -278,7 +98,7 @@ let productosGlobales = {
     categoria8: []
 };
 
-// Configuración de Firebase
+
 const firebaseConfig = {
     apiKey: "AIzaSyCfc0_ZmMa1mQv6TRC88qVQ6xRXrvhjvAM",
     authDomain: "base-de-datos-smaguiett.firebaseapp.com",
@@ -288,14 +108,14 @@ const firebaseConfig = {
     appId: "1:288404901483:web:c777b85fb6f10718552b2e"
 };
 
-// Variable global para almacenar la instancia de Firebase
+
 let firebaseApp = null;
 let firestoreDb = null;
 
-// Función para cargar Firebase dinámicamente
+
 function loadFirebase() {
     return new Promise((resolve, reject) => {
-        // Si ya está inicializado, devolver la instancia
+        
         if (window.firebase && window.firebase.apps.length > 0) {
             console.log(" Firebase ya está inicializado");
             firebaseApp = window.firebase.apps[0];
@@ -304,7 +124,7 @@ function loadFirebase() {
             return;
         }
 
-        // Verificar si los scripts ya están cargados
+        
         if (window.firebase) {
             console.log(" Inicializando Firebase con configuración");
             try {
@@ -319,7 +139,7 @@ function loadFirebase() {
             }
         }
 
-        // Crear script para Firebase App
+        
         const scriptApp = document.createElement('script');
         scriptApp.src = 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js';
         scriptApp.onload = () => {
@@ -328,7 +148,7 @@ function loadFirebase() {
             scriptFirestore.src = 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js';
             scriptFirestore.onload = () => {
                 try {
-                    // Inicializar Firebase
+                    
                     firebaseApp = firebase.initializeApp(firebaseConfig);
                     firestoreDb = firebase.firestore();
                     
@@ -353,7 +173,7 @@ function loadFirebase() {
     });
 }
 
-// Función de prueba para verificar conexión a Firestore
+
 async function probarConexionFirestore(db) {
     try {
         console.log(" Intentando conectar a Firestore");
@@ -369,22 +189,21 @@ async function probarConexionFirestore(db) {
         return false;
     }
 }
-// Función para cargar productos
+
 async function cargarProductos() {
     try {
         console.time(" Carga de Productos");
         
-        // Cargar Firebase
+        
         const { db } = await loadFirebase();
         
-        // Verificar conexión
+        
         const conexionExitosa = await probarConexionFirestore(db);
         if (!conexionExitosa) {
             console.error(" No se pudo conectar a Firestore");
             return;
         }
 
-        // Limpiar productosGlobales
         Object.keys(productosGlobales).forEach(key => productosGlobales[key] = []);
 
         const categorias = [
@@ -392,13 +211,11 @@ async function cargarProductos() {
             'categoria5', 'categoria6', 'categoria7', 'categoria8'
         ];
 
-        // Cargar productos de todas las categorías en una sola consulta
         const productosRef = db.collection('productos');
         const querySnapshot = await productosRef.get();
 
         console.log(` Total de productos: ${querySnapshot.docs.length}`);
 
-        // Procesar productos
         querySnapshot.docs.forEach(doc => {
             const producto = doc.data();
             const categoria = producto.categoria;
@@ -411,12 +228,10 @@ async function cargarProductos() {
             }
         });
 
-        // Ordenar productos por categoría
         Object.keys(productosGlobales).forEach(categoria => {
             productosGlobales[categoria].sort((a, b) => (a.orden || 0) - (b.orden || 0));
         });
 
-        // Renderizar productos
         filtrarProductos();
 
         console.timeEnd(" Carga de Productos");
@@ -450,7 +265,6 @@ function filtrarProductos() {
         const seccion = document.querySelector(`.${key}`);
         const productos = productosGlobales[key];
 
-        // Filtrar productos
         const productosFiltrados = productos.filter(producto => {
             const descripcion = producto.descripcion_corta.toLowerCase();
             const coincideTexto = descripcion.includes(filtroTexto);
@@ -458,7 +272,7 @@ function filtrarProductos() {
             return coincideTexto && coincideCategoria;
         });
 
-        // Ordenar por precio si es necesario
+        
         if (filtroPrecio !== "default") {
             productosFiltrados.sort((a, b) => {
                 const precioA = parseFloat(a.precio.replace("$", ""));
@@ -467,7 +281,7 @@ function filtrarProductos() {
             });
         }
 
-        // Limpiar y renderizar contenedor
+        
         contenedor.innerHTML = "";
         productosFiltrados.forEach(producto => {
             const productoHTML = `
@@ -504,7 +318,7 @@ function filtrarProductos() {
     mensajeNoProductos.style.display = totalProductosVisibles > 0 ? "none" : "block";
 }
 
-// ==================== FUNCIONES DEL CARRITO ====================
+// FUNCIONES DEL CARRITO
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
