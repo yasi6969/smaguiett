@@ -219,7 +219,9 @@ h2 {
   display: block;
   flex: 1;
 }
-
+.header__logo:hover {
+  transform: scale(1.1);
+}
 .header__logo-img {
   width: 100%;
   height: auto;
@@ -320,15 +322,15 @@ h2 {
 .header__menu-toggle {
   color: var(--color-principal);
   cursor: pointer;
-  transition: color 0.3s;
+  transition: transform 0.3s;
   right: 15px;
   top: 15px;
   display: none;
-  transition: transform 0.3s;
   padding: 0 7px;
-
 }
-
+.header__menu-toggle:hover {
+  transform: scale(1.1);
+}
 
 .header__menu-toggle span {
   display: block; 
@@ -363,8 +365,8 @@ h2 {
 }
 .header.active {
   height: 100vh;
-
   align-content: start;
+
 }
 
 /*HEADER SMALL*/
