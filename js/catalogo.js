@@ -143,7 +143,7 @@ function loadFirebase() {
         const scriptApp = document.createElement('script');
         scriptApp.src = 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js';
         scriptApp.onload = () => {
-            // Crear script para Firestore
+            
             const scriptFirestore = document.createElement('script');
             scriptFirestore.src = 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js';
             scriptFirestore.onload = () => {
@@ -333,9 +333,24 @@ function agregarAlCarrito(id) {
         carrito.push({ ...producto, cantidad: 1 });
     }
 
+
+    const sonido = document.getElementById("click-sound");
+    if (sonido) {
+        sonido.currentTime = 0;
+        sonido.play().catch(e => console.log("Error al reproducir sonido", e));
+    }
+    const contenedorCarrito = document.getElementById("carrito-container");
+if (contenedorCarrito) {
+  contenedorCarrito.classList.add("carrito-click");
+  setTimeout(() => {
+    contenedorCarrito.classList.remove("carrito-click");
+  }, 300); 
+}
+
     guardarCarrito();
     actualizarContadorCarrito();
 }
+
 
 function obtenerProductoPorId(id) {
     return [...productosGlobales.categoria1, ...productosGlobales.categoria2, ...productosGlobales.categoria3, ...productosGlobales.categoria4, ...productosGlobales.categoria5, ...productosGlobales.categoria6, ...productosGlobales.categoria7, ...productosGlobales.categoria8].find(p => p.id == id);
