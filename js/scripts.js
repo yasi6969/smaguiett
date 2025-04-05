@@ -96,19 +96,19 @@ window.addEventListener('scroll', () => {
   clearTimeout(scrollTimeout);
   scrollTimeout = setTimeout(updateHeaderClosedHeight, 500);
 
-  // Cierra el menú si está abierto
+
   if (nav.classList.contains('active')) {
     closeMenu();
   }
 });
 
 
-// Detectar redimensionar ventana
+
 window.addEventListener('resize', () => {
   setTimeout(updateHeaderClosedHeight, 300);
 });
 
-// Cerrar menú al hacer clic fuera
+
 document.addEventListener('click', (event) => {
   const isClickInsideMenu =
     event.target.closest('.header__menu-link') ||
@@ -119,7 +119,6 @@ document.addEventListener('click', (event) => {
   }
 });
 
-// Inicializar altura al cargar
 window.addEventListener('DOMContentLoaded', updateHeaderClosedHeight);
 
 
