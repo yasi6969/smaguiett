@@ -767,7 +767,7 @@ video {
 }
 
 .ver-mas:hover {
-  color: var(--color-secundario);
+
   transform: scale(1.05);
 }
 

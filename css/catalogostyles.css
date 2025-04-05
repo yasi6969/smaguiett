@@ -301,9 +301,9 @@ background-color:#000;
 }
 
 
-.agregar-carrito:hover {
-transform: scale(1.05);
-
+.agregar-carrito:hover{
+    box-shadow: 0px 0px 8px var(--color-principal);
+    transform: scale(1.02);
 }
 
 .categoria__btn {
@@ -380,6 +380,9 @@ transform: scale(1.05);
 }
 .categoria3 .categoria__btn:hover {
     box-shadow: 0px 0px 10px #0ff;
+}
+#productos3 .agregar-carrito:hover{
+    box-shadow: 0px 0px 8px #0ff;
 }
 
 /* PAGINA CARRITO*/
